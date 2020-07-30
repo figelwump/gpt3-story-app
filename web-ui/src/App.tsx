@@ -70,8 +70,8 @@ class App extends Component<{}, AppState> {
     getGptPrelude(): string {
         const targetAudiencePhrase = this.state.targetAudience.includes('child') ? `children's story` : 'story for adults';
 
-        return `Below is a ${targetAudiencePhrase} written so that a ${this.state.targetAudience} can understand. It is a story that a person and an AI assistant that is an excellent ${targetAudiencePhrase} writer are writing together. 
-        They take turns each writing a few lines of the story, building upon the whole story written so far. The story is set in ${this.state.storySetting}. There are no curse words or pornographic words. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End"
+        return `Below is a ${targetAudiencePhrase} written so that a ${this.state.targetAudience} can understand. It is a story that a person and an AI assistant that is an excellent ${targetAudiencePhrase} writer are writing together. The AI assistant writes clear, simple, complete sentences.
+        They take turns each writing a few lines of the story, building upon the whole story written so far. The story is set in ${this.state.storySetting}. There are no curse words and no violence in the story. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End"
         """`;
     }
 
@@ -160,7 +160,7 @@ class App extends Component<{}, AppState> {
                     </p>
                 )}
                 <div className="w-1/2 mt-2 overflow-auto h-2/3">
-                    <ul className="h-full text-left">
+                    <ul className="text-left">
                         {this.state.story.map((storySegment, idx) => {
                             return (
                                 <li key={idx} className={storySegment.isGPT3 ? 'text-base text-indigo-600 p-2' : 'text-base text-gray-600 p-2'}>
