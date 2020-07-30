@@ -68,10 +68,10 @@ class App extends Component<{}, AppState> {
     }
 
     getGptPrelude(): string {
-        const targetAudiencePhrase = this.state.targetAudience.includes('child') ? `children's story` : 'adult story';
+        const targetAudiencePhrase = this.state.targetAudience.includes('child') ? `children's story` : 'story for adults';
 
-        return `Below is a ${targetAudiencePhrase} written so that a ${this.state.targetAudience} can understand. It is a story that a person and an AI assistant that is a ${targetAudiencePhrase} writer are writing together. 
-        They take turns each writing a few lines of the story, building upon the whole story written so far. The story is set in ${this.state.storySetting}. The story starts with "Once upon a time", and continues until it reaches the end, at which point the AI Assistant ends the story with "The End"
+        return `Below is a ${targetAudiencePhrase} written so that a ${this.state.targetAudience} can understand. It is a story that a person and an AI assistant that is an excellent ${targetAudiencePhrase} writer are writing together. 
+        They take turns each writing a few lines of the story, building upon the whole story written so far. The story is set in ${this.state.storySetting}. There are no curse words or pornographic words. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End"
         """`;
     }
 
@@ -153,17 +153,17 @@ class App extends Component<{}, AppState> {
 
     render() {
         return (
-            <div className="text-center flex flex-col justify-center h-screen w-screen items-center">
+            <div className="flex flex-col items-center justify-center w-screen h-screen text-center">
                 {this.state.isStoryStarted && (
-                    <p className="text-gray-900 text-xl font-semibold">
+                    <p className="text-xl font-semibold text-gray-900">
                         A story set in {this.state.storySetting}, written for a {this.state.targetAudience}
                     </p>
                 )}
-                <div className="h-2/3 w-1/2 mt-2 overflow-auto">
-                    <ul className="text-left h-full">
+                <div className="w-1/2 mt-2 overflow-auto h-2/3">
+                    <ul className="h-full text-left">
                         {this.state.story.map((storySegment, idx) => {
                             return (
-                                <li key={idx} className={storySegment.isGPT3 ? 'text-base text-indigo-700 p-2' : 'text-base text-gray-700 p-2'}>
+                                <li key={idx} className={storySegment.isGPT3 ? 'text-base text-indigo-600 p-2' : 'text-base text-gray-600 p-2'}>
                                     {storySegment.text}
                                 </li>
                             );
@@ -172,14 +172,14 @@ class App extends Component<{}, AppState> {
                     <div ref={(el) => (this.scrollTarget = el)} data-explanation="This is where we scroll to"></div>
                 </div>
                 {this.state.isStoryStarted ? (
-                    <div className="text-left flex flex-col w-1/2 mt-4">
+                    <div className="flex flex-col w-1/2 mt-4 text-left">
                         <label htmlFor="nextLine" className="block text-lg font-medium leading-5 text-gray-700">
                             What are your next line(s)?
                         </label>
-                        <div className="mt-2 relative rounded-md shadow-sm">
+                        <div className="relative mt-2 rounded-md shadow-sm">
                             <textarea
                                 id="nextLine"
-                                className="form-input block w-full sm:text-base sm:leading-5 h-24"
+                                className="block w-full h-24 form-input sm:text-base sm:leading-5"
                                 onChange={this.handleInputChange}
                                 value={this.state.nextLine}
                                 aria-invalid="true"
@@ -188,8 +188,8 @@ class App extends Component<{}, AppState> {
                         </div>
                         {this.state.showGptError && (
                             <div className="flex flex-row items-center mt-1">
-                                <div className="pt-1 pr-1 flex items-center pointer-events-none">
-                                    <svg className="h-5 w-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                <div className="flex items-center pt-1 pr-1 pointer-events-none">
+                                    <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             fillRule="evenodd"
                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
@@ -205,11 +205,11 @@ class App extends Component<{}, AppState> {
                         <span className="inline-flex rounded-md shadow-sm">
                             <button
                                 type="button"
-                                className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+                                className="inline-flex items-center px-4 py-2 mt-4 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
                                 onClick={this.handleGenerateNextLine}
                             >
                                 {this.state.isLoading && (
-                                    <svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
+                                    <svg className="w-5 h-5 mr-3 text-white animate-spin" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                         <path
                                             className="opacity-75"
@@ -227,10 +227,10 @@ class App extends Component<{}, AppState> {
                         <label htmlFor="targetAudience" className="block text-base font-medium leading-5 text-gray-700">
                             Target Audience
                         </label>
-                        <div className="mt-2 relative rounded-md shadow-sm">
+                        <div className="relative mt-2 rounded-md shadow-sm">
                             <input
                                 id="targetAudience"
-                                className="form-input block w-full sm:text-base sm:leading-5"
+                                className="block w-full form-input sm:text-base sm:leading-5"
                                 onChange={this.handleTargetAudienceChange}
                                 value={this.state.targetAudience}
                                 aria-invalid="true"
@@ -238,13 +238,13 @@ class App extends Component<{}, AppState> {
                             />
                         </div>
 
-                        <label htmlFor="storySetting" className="block text-base font-medium leading-5 text-gray-700 mt-3">
+                        <label htmlFor="storySetting" className="block mt-3 text-base font-medium leading-5 text-gray-700">
                             Story Setting
                         </label>
-                        <div className="mt-2 relative rounded-md shadow-sm">
+                        <div className="relative mt-2 rounded-md shadow-sm">
                             <input
                                 id="storySetting"
-                                className="form-input block w-full sm:text-base sm:leading-5"
+                                className="block w-full form-input sm:text-base sm:leading-5"
                                 onChange={this.handleStorySettingChange}
                                 value={this.state.storySetting}
                                 aria-invalid="true"
@@ -252,15 +252,15 @@ class App extends Component<{}, AppState> {
                             />
                         </div>
 
-                        <span className="inline-flex rounded-md shadow-sm justify-center">
+                        <span className="inline-flex justify-center rounded-md shadow-sm">
                             <button
                                 type="button"
-                                className="mt-4 inline-flex items-center px-6 py-3 border border-transparent text-lg leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+                                className="inline-flex items-center px-6 py-3 mt-4 text-lg font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
                                 onClick={this.handleStartStory}
                                 disabled={this.state.isLoading}
                             >
                                 {this.state.isLoading && (
-                                    <svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
+                                    <svg className="w-5 h-5 mr-3 text-white animate-spin" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                         <path
                                             className="opacity-75"
