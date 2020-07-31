@@ -31,7 +31,7 @@ def run_web_app():
             max_tokens=200,
             temperature=1.0,
             top_p=1,
-            n=2,
+            n=1,
             frequency_penalty=0.8,
             stop="\n"
         )
