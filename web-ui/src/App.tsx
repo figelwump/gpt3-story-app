@@ -16,13 +16,14 @@ interface AppState {
     showGptError: boolean;
     isStoryStarted: boolean;
     isLoading: boolean;
-    targetAudience: string;
-    storySetting: string;
-    genre: string;
 }
 
 class App extends Component<{}, AppState> {
     private scrollTarget;
+
+    //targetAudience: '', // '1st grade child', '5th grade child', 'young adult', 'adult', etc
+    //storySetting: '', // 'India', 'California', 'Victorian times', 'China', 'the movie Frozen', 'the movie Game of Thrones', 'a small American town'
+    //genre: 'fan fiction', // 'fantasy', 'children's story', 'sports', 'science fiction'
     private storyDescription: string;
 
     constructor(props) {
@@ -33,9 +34,6 @@ class App extends Component<{}, AppState> {
             showGptError: false,
             isStoryStarted: false,
             isLoading: false,
-            targetAudience: '', // '1st grade child', '5th grade child', 'young adult', 'adult', etc
-            storySetting: '', // 'India', 'California', 'Victorian times', 'China', 'the movie Frozen', 'the movie Game of Thrones', 'a small American town'
-            genre: 'fan fiction', // 'fantasy', 'children's story', 'sports', 'science fiction'
         };
 
         this.scrollTarget = React.createRef();
@@ -44,8 +42,6 @@ class App extends Component<{}, AppState> {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleStartStory = this.handleStartStory.bind(this);
         this.handleGenerateNextLine = this.handleGenerateNextLine.bind(this);
-        this.handleStorySettingChange = this.handleStorySettingChange.bind(this);
-        this.handleTargetAudienceChange = this.handleTargetAudienceChange.bind(this);
     }
 
     componentDidUpdate() {
@@ -58,18 +54,6 @@ class App extends Component<{}, AppState> {
         });
     }
 
-    handleTargetAudienceChange(e) {
-        this.setState({
-            targetAudience: e.target.value,
-        });
-    }
-
-    handleStorySettingChange(e) {
-        this.setState({
-            storySetting: e.target.value,
-        });
-    }
-
     getGptPrelude(): string {
         // return `Below is a ${this.state.genre} story written so that a ${this.state.targetAudience} can understand. It is a story that a person and an AI assistant that is an excellent ${this.state.genre} writer are writing together. The AI assistant writes clear, simple, complete sentences.
         // They take turns each writing a few lines of the story, building upon the whole story written so far. It is a ${this.state.genre} story set in ${this.state.storySetting} written for a ${this.state.targetAudience}. There are no curse words and no violence in the story. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End"
@@ -77,7 +61,7 @@ class App extends Component<{}, AppState> {
         // storyDescription: something like 'It is a ${this.state.genre} story set in ${this.state.storySetting} written for a ${this.state.targetAudience'
 
         return `Below is a story. It is a story that a person and an AI assistant that is an excellent writer are writing together. The AI assistant writes clear, simple, complete sentences.
-        They take turns each writing a few lines of the story, building upon the whole story written so far. There are no curse words and no violence in the story. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End"
+        They take turns each writing a few lines of the story, building upon the whole story written so far. There are no curse words and no violence in the story. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End".
         It is ${this.storyDescription}.
         """`;
     }
