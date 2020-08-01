@@ -21,9 +21,10 @@ interface AppState {
 class App extends Component<{}, AppState> {
     private scrollTarget;
 
-    //targetAudience: '', // '1st grade child', '5th grade child', 'young adult', 'adult', etc
-    //storySetting: '', // 'India', 'California', 'Victorian times', 'China', 'the movie Frozen', 'the movie Game of Thrones', 'a small American town'
-    //genre: 'fan fiction', // 'fantasy', 'children's story', 'sports', 'science fiction'
+    // targetAudience: '1st grade child', '5th grade child', 'young adult', 'adult', etc
+    // storySetting: 'India', 'California', 'Victorian times', 'China', 'the movie Frozen', 'the movie Game of Thrones', 'a small American town'
+    // genre: 'fan fiction', 'fantasy', 'children's story', 'sports', 'science fiction'
+    // storyDescription: something like 'It is a ${this.state.genre} story set in ${this.state.storySetting} written for a ${this.state.targetAudience}'
     private storyDescription: string;
 
     constructor(props) {
@@ -55,11 +56,6 @@ class App extends Component<{}, AppState> {
     }
 
     getGptPrelude(): string {
-        // return `Below is a ${this.state.genre} story written so that a ${this.state.targetAudience} can understand. It is a story that a person and an AI assistant that is an excellent ${this.state.genre} writer are writing together. The AI assistant writes clear, simple, complete sentences.
-        // They take turns each writing a few lines of the story, building upon the whole story written so far. It is a ${this.state.genre} story set in ${this.state.storySetting} written for a ${this.state.targetAudience}. There are no curse words and no violence in the story. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End"
-        // """`;
-        // storyDescription: something like 'It is a ${this.state.genre} story set in ${this.state.storySetting} written for a ${this.state.targetAudience'
-
         return `Below is a story. It is a story that a person and an AI assistant that is an excellent writer are writing together. The AI assistant writes clear, simple, complete sentences.
         They take turns each writing a few lines of the story, building upon the whole story written so far. There are no curse words and no violence in the story. The story starts with "Once upon a time", and continues until it reaches the end, at which point the story ends with "The End".
         It is ${this.storyDescription}.
@@ -213,70 +209,6 @@ class App extends Component<{}, AppState> {
                         </button>
                     </span>
                 </div>
-                {/* <div className="flex flex-col w-1/4 text-left">
-                        <label htmlFor="targetAudience" className="block text-base font-medium leading-5 text-gray-700">
-                            Target Audience
-                        </label>
-                        <div className="relative mt-2 rounded-md shadow-sm">
-                            <input
-                                id="targetAudience"
-                                className="block w-full form-input sm:text-base sm:leading-5"
-                                onChange={this.handleTargetAudienceChange}
-                                value={this.state.targetAudience}
-                                aria-invalid="true"
-                                aria-describedby="targetAudience-error"
-                            />
-                        </div>
-
-                        <label htmlFor="storySetting" className="block mt-3 text-base font-medium leading-5 text-gray-700">
-                            Story Setting
-                        </label>
-                        <div className="relative mt-2 rounded-md shadow-sm">
-                            <input
-                                id="storySetting"
-                                className="block w-full form-input sm:text-base sm:leading-5"
-                                onChange={this.handleStorySettingChange}
-                                value={this.state.storySetting}
-                                aria-invalid="true"
-                                aria-describedby="storySetting-error"
-                            />
-                        </div>
-
-                        <label htmlFor="genre" className="block mt-3 text-base font-medium leading-5 text-gray-700">
-                            Genre
-                        </label>
-                        <div className="relative mt-2 rounded-md shadow-sm">
-                            <input
-                                id="genre"
-                                className="block w-full form-input sm:text-base sm:leading-5"
-                                onChange={this.handleGenreChange}
-                                value={this.state.genre}
-                                aria-invalid="true"
-                                aria-describedby="genre-error"
-                            />
-                        </div>
-
-                        <span className="inline-flex justify-center rounded-md shadow-sm">
-                            <button
-                                type="button"
-                                className="inline-flex items-center px-6 py-3 mt-4 text-lg font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
-                                onClick={this.handleStartStory}
-                                disabled={this.state.isLoading}
-                            >
-                                {this.state.isLoading && (
-                                    <svg className="w-5 h-5 mr-3 text-white animate-spin" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path
-                                            className="opacity-75"
-                                            fill="currentColor"
-                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                        ></path>
-                                    </svg>
-                                )}
-                                Start story
-                            </button>
-                        </span>
-                    </div> */}
             </div>
         );
     }
