@@ -6,12 +6,13 @@ How to run:
 
 This is the backend wrapper around the openai API
 
--   cd gpt
--   source .venv/bin/activate
--   export OPENAI_KEY="<api key>"
--   run_gpt_api.py
+-   `cd gpt`
+-   `source .venv/bin/activate`
+-   `export OPENAI_KEY="<api key>"`
+-   `python run_gpt_api.py`
 
 ### Frontend
 
--   cd web-ui; npm run watch
--   live-server web-ui/dist-dev (install live-server here if you don't have it: https://www.npmjs.com/package/live-server)
+-   `cd web-ui; npm install`
+-   `npm run watch`
+-   `live-server web-ui/dist-dev` (if you don't have live-server: https://www.npmjs.com/package/live-server)
