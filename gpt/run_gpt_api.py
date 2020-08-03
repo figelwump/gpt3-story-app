@@ -13,7 +13,7 @@ def run_web_app():
 
     openai.api_key = os.getenv('OPENAI_KEY')
 
-    @app.route("/gpt", methods=["GET", "POST"])
+    @app.route("/gpt", methods=["POST"])
     def gpt():
         print("in gpt route: ")
         print(request)
